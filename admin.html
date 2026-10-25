@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Binance Admin - Mock App</title>
+  <style>
+    :root { --bg: #181a20; --bg-2: #202630; --text: #eaecef; --yellow: #f0b90b; --green: #2EBD85; --danger: #f6465d; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: var(--bg); color: var(--text); font-family: Arial, sans-serif; padding: 20px; }
+    .container { max-width: 600px; margin: 0 auto; background: var(--bg-2); padding: 24px; border-radius: 12px; }
+    h1 { text-align: center; color: var(--yellow); margin-bottom: 10px; }
+    .subtitle { text-align: center; color: #929aa5; margin-bottom: 24px; font-size: 14px; }
+    .request-card { border: 1px solid #333b47; border-radius: 8px; padding: 16px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; background: #1d232b; }
+    .request-info { font-size: 16px; }
+    .request-email { font-weight: bold; color: #fff; margin-bottom: 4px; }
+    .request-status { font-size: 12px; color: #929aa5; }
+    .approve-btn { background: var(--green); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    .approve-btn:hover { background: #25a372; }
+    .approve-btn:disabled { background: #555; cursor: not-allowed; }
+    .empty-msg { text-align: center; color: #929aa5; margin-top: 20px; background: #1d232b; padding: 20px; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📱 Mock Binance App (Admin)</h1>
+    <p class="subtitle">هنا تظهر طلبات التحقق. يتم تحديث القائمة تلقائياً كل 5 ثوانٍ.</p>
+    <div id="requestsList">
+      <div class="empty-msg">جاري تحميل البيانات...</div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { supabase } from './supabase.js';
+
+    const requestsList = document.getElementById('requestsList');
+
+    async function fetchPendingRequests() {
+      console.log("🔍 جاري البحث عن الطلبات المعلقة...");
+      
+      // جلب البيانات وترتيبها من الأحدث إلى الأقدم (حسب created_at)
+      const { data, error } = await supabase
+        .from('contacts')
+        .select('*')
+        .eq('status', 'pending')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('❌ خطأ في جلب البيانات:', error);
+        requestsList.innerHTML = `<div class="empty-msg" style="color: red;">خطأ: ${error.message}</div>`;
+        return;
+      }
+
+      console.log("📊 الطلبات المعلقة الحالية:", data);
+
+      requestsList.innerHTML = '';
+
+      if (data.length === 0) {
+        requestsList.innerHTML = '<div class="empty-msg">لا توجد طلبات تحقق (pending) حالياً.</div>';
+        return;
+      }
+
+      data.forEach(req => {
+        const card = document.createElement('div');
+        card.className = 'request-card';
+        
+        // تنسيق الوقت
+        const time = new Date(req.created_at).toLocaleTimeString();
+
+        card.innerHTML = `
+          <div class="request-info">
+            <div class="request-email">${req.email}</div>
+            <div class="request-status">Time: ${time}</div>
+          </div>
+          <button class="approve-btn" data-email="${req.email}">Approve</button>
+        `;
+        
+        requestsList.appendChild(card);
+      });
+
+      // ربط أزرار الموافقة
+      document.querySelectorAll('.approve-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          const email = e.target.getAttribute('data-email');
+          e.target.textContent = 'Approving...';
+          e.target.disabled = true;
+
+          console.log(`📱 جاري الموافقة على: ${email}`);
+
+          const { error: updateError } = await supabase
+            .from('contacts')
+            .update({ status: 'approved' })
+            .eq('email', email);
+
+          if (updateError) {
+            alert('حدث خطأ: ' + updateError.message);
+            e.target.textContent = 'Error';
+          } else {
+            console.log(`✅ تمت الموافقة على ${email}`);
+            e.target.textContent = 'Approved ✓';
+            // إعادة تحميل القائمة بعد الموافقة
+            setTimeout(fetchPendingRequests, 1000);
+          }
+        });
+      });
+    }
+
+    // جلب البيانات فور فتح الصفحة، ثم تحديثها كل 5 ثوانٍ
+    fetchPendingRequests();
+    setInterval(fetchPendingRequests, 5000);
+  </script>
+</body>
+</html>

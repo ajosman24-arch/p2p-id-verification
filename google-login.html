@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Continue with Google</title>
+    <style>
+      :root {
+        --bg: #0e1117;
+        --panel: #131922;
+        --panel-2: #181f2b;
+        --line: rgba(255, 255, 255, 0.1);
+        --text: #f3f5f8;
+        --muted: #8d97a7;
+        --yellow: #f0b90b;
+        --danger: #f6465d;
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        min-height: 100%;
+        background: var(--bg);
+        color: var(--text);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 16px;
+      }
+
+      .page {
+        width: min(100%, 460px);
+      }
+
+      .card {
+        background: rgba(18, 24, 32, 0.96);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 28px 22px 22px;
+        box-shadow: 0 20px 42px rgba(0, 0, 0, 0.28);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 18px;
+      }
+
+      .brand svg {
+        width: 74px;
+        height: 74px;
+      }
+
+      .title {
+        margin: 0 0 18px;
+        text-align: center;
+        font-size: 30px;
+        line-height: 1.2;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+      }
+
+      .subtitle {
+        margin: 0 0 20px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      .field {
+        margin-bottom: 18px;
+      }
+
+      .label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .input-shell {
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.02);
+        border-radius: 12px;
+        transition: border-color 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      .input-shell:focus-within {
+        border-color: rgba(240, 185, 11, 0.8);
+        box-shadow: 0 0 0 3px rgba(240, 185, 11, 0.12);
+      }
+
+      .input-shell.error {
+        border-color: rgba(246, 70, 93, 0.9);
+        box-shadow: 0 0 0 3px rgba(246, 70, 93, 0.08);
+      }
+
+      input {
+        width: 100%;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: var(--text);
+        padding: 15px 16px;
+        font-size: 16px;
+      }
+
+      input::placeholder {
+        color: var(--muted);
+      }
+
+      .warning {
+        display: none;
+        margin-top: 8px;
+        color: var(--danger);
+        font-size: 13px;
+        line-height: 18px;
+      }
+
+      .warning.show {
+        display: block;
+      }
+
+      .login-btn {
+        width: 100%;
+        border: none;
+        border-radius: 12px;
+        background: var(--yellow);
+        color: #121212;
+        min-height: 48px;
+        font-weight: 700;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 8px;
+      }
+
+      .login-btn:hover {
+        filter: brightness(1.02);
+      }
+
+      .footer-note {
+        margin-top: 16px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .footer-note a {
+        color: var(--yellow);
+        text-decoration: none;
+      }
+
+      @media (max-width: 480px) {
+        .card {
+          padding: 22px 18px 18px;
+        }
+
+        .title {
+          font-size: 26px;
+        }
+
+        .subtitle {
+          font-size: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <main class="card" aria-label="Google login form">
+        <div class="brand" aria-label="Google brand icon">
+          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path fill="#EA4335" d="M24 9.5c3.54 0 6.7 1.22 9.18 3.62l6.85-6.85C35.79 2.27 30.42 0 24 0 14.64 0 6.52 5.38 2.55 13.21l7.98 6.19C12.26 14.36 17.57 9.5 24 9.5z"></path>
+            <path fill="#4285F4" d="M46.5 24.55c0-1.61-.14-3.16-.4-4.55H24v8.63h12.7c-.54 2.9-2.2 5.35-4.69 7.01l7.61 5.91C43.7 36.3 46.5 30.91 46.5 24.55z"></path>
+            <path fill="#FBBC05" d="M32.01 35.09c-2.13 1.44-4.86 2.29-8.01 2.29-6.43 0-11.74-4.35-13.67-10.2l-8.08 6.26C5.3 42.67 13.88 48 24 48c7.28 0 13.39-2.4 17.82-6.51l-9.81-6.4z"></path>
+            <path fill="#34A853" d="M10.33 27.18A14.59 14.59 0 0 1 9.5 24c0-1.64.29-3.22.8-4.73L2.12 12.84A23.96 23.96 0 0 0 0 24c0 3.86.92 7.51 2.55 10.79l7.78-6.02z"></path>
+          </svg>
+        </div>
+
+        <h1 class="title">Continue with Google</h1>
+        <p class="subtitle">Please enter the email linked to your Google account.</p>
+
+        <form id="googleForm" novalidate>
+          <div class="field">
+            <label class="label" for="googleEmail">Google account email</label>
+            <div class="input-shell" id="googleShell">
+              <input id="googleEmail" type="email" placeholder="name@gmail.com" autocomplete="email" />
+            </div>
+            <div class="warning" id="googleWarning">Please enter a valid Google email address.</div>
+          </div>
+
+          <button type="submit" class="login-btn">Continue</button>
+        </form>
+
+        <div class="footer-note">
+          <a href="javascript:window.close();">Back</a>
+        </div>
+      </main>
+    </div>
+
+    <!-- لصفحة جوجل -->
+<script type="module" src="google.js"></script>
+  </body>
+</html>

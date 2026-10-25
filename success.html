@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account Approved | Binance</title>
+  <style>
+    :root { --bg: #181a20; --text: #eaecef; --muted: #929aa5; --yellow: #f0b90b; --green: #2EBD85; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: var(--bg); color: var(--text); font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+    .success-icon { width: 80px; height: 80px; background: rgba(46, 189, 133, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; animation: scaleIn 0.5s ease-out; }
+    .success-icon svg { width: 40px; height: 40px; color: var(--green); }
+    @keyframes scaleIn { 0% { transform: scale(0); } 80% { transform: scale(1.1); } 100% { transform: scale(1); } }
+    h1 { font-size: 28px; font-weight: 700; margin: 0 0 12px 0; }
+    p { color: var(--muted); font-size: 16px; line-height: 1.5; max-width: 400px; margin: 0 0 32px 0; }
+    .btn { background: var(--yellow); color: #111827; border: none; border-radius: 8px; padding: 14px 32px; font-size: 16px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; }
+    
+    /* إضافة زر اللغة */
+    .footer { margin-top: 40px; color: var(--muted); cursor: pointer; font-size: 14px; }
+    .footer:hover { color: var(--yellow); }
+  </style>
+</head>
+<body>
+  <div class="success-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </div>
+  
+  <h1 id="txtTitle">Your Account Has Been Approved!</h1>
+  <p id="txtDesc">Your identity has been successfully verified. You can now access all features of your account.</p>
+  
+  <!-- تم حذف target="_blank" ليفتح في نفس التبويب -->
+  <a href="https://p2p.binance.com/en" class="btn" id="txtBtn">Go to Dashboard</a>
+
+  <div class="footer" id="langToggleBtn">English / العربية</div>
+
+  <script>
+    const translations = {
+      en: { title: "Your Account Has Been Approved!", desc: "Your identity has been successfully verified. You can now access all features of your account.", btn: "Go to Dashboard" },
+      ar: { title: "تمت الموافقة على حسابك!", desc: "تم التحقق من هويتك بنجاح. يمكنك الآن الوصول إلى جميع ميزات حسابك.", btn: "الذهاب إلى لوحة التحكم" }
+    };
+
+    let currentLang = localStorage.getItem('siteLang') || 'en';
+
+    function updateLang() {
+      const t = translations[currentLang];
+      document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+      document.getElementById('txtTitle').textContent = t.title;
+      document.getElementById('txtDesc').textContent = t.desc;
+      document.getElementById('txtBtn').textContent = t.btn;
+      document.getElementById('langToggleBtn').textContent = currentLang === 'en' ? "English / العربية" : "العربية / English";
+    }
+
+    document.getElementById('langToggleBtn').addEventListener('click', () => {
+      currentLang = currentLang === 'en' ? 'ar' : 'en';
+      localStorage.setItem('siteLang', currentLang);
+      updateLang();
+    });
+
+    updateLang();
+  </script>
+</body>
+</html>
