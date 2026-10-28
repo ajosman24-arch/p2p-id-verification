@@ -143,14 +143,27 @@
 
     if (userEmail) {
       async function checkApproval() {
-        const { data, error } = await supabase.from('contacts').select('status').eq('email', userEmail);
-        if (error) return;
-        if (data && data.length > 0) {
-          const isApproved = data.some(row => row.status === 'approved');
-          if (isApproved) {
-            clearInterval(intervalId);
-            window.location.href = 'success.html';
-          }
+  try {
+    const { data, error } = await supabase.from('contacts').select('status').eq('email', userEmail);
+    if (error) return;
+    
+    if (data && data.length > 0) {
+      const isApproved = data.some(row => row.status === 'approved');
+      if (isApproved) {
+        clearInterval(intervalId); // إيقاف الفحص
+        console.log("✅ تم اكتشاف الموافقة! جاري التحويل...");
+        
+        // إضافة تنبيه لنعرف أن الكود وصل لهذه المرحلة
+        alert("تمت الموافقة! اضغط OK للانتقال لصفحة النجاح.");
+        
+        // الانتقال لصفحة النجاح
+        window.location.href = 'success.html'; 
+      }
+    }
+  } catch (err) {
+    console.error("حدث خطأ أثناء الانتقال:", err);
+  }
+}
         }
       }
       const intervalId = setInterval(checkApproval, 3000);
