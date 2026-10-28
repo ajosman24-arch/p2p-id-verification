@@ -155,7 +155,15 @@
                 }
               }
               intervalId = setInterval(checkApproval, 3000);
-              checkApproval();
+checkApproval();
+
+// الحل السحري للهواتف: عندما يعود المستخدم لهذا التبويب، افحص فوراً!
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    console.log("عاد المستخدم للصفحة، جاري الفحص فوراً...");
+    checkApproval();
+  }
+});
             }
 
             if (resendBtn) {
